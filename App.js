@@ -6,11 +6,17 @@ import GoalItem from './components/GoalItem';
 
 export default function App() {
   const [courseGoals, setCourseGoals] = useState([
-    {text:'Take a trip to Asia', key:' 01'},
+    {text:'Take a trip to Asia', id:' 01'},
   ])
 
   function addGoalHandler(enteredGoal){
-    setCourseGoals((currentGoals)=>[...currentGoals, {text: enteredGoal, key: Math.random().toString()}])
+    setCourseGoals((currentGoals)=>[...currentGoals, {text: enteredGoal, id: Math.random().toString()}])
+  }
+
+  function deleteGoalHandler(id){
+    setCourseGoals((currentGoals)=>{
+      return currentGoals.filter((goal)=>goal.id !==id)
+    })
   }
 
   return (
@@ -21,7 +27,7 @@ export default function App() {
             (itemData) => {
             itemData.index
             return (
-          <GoalItem text={itemData.item.text}/>
+          <GoalItem text={itemData.item.text} onDeleteItem={deleteGoalHandler} id={itemData.item.id}/>
             )
           }} alwaysBounceVertical={false} />
         </View>
