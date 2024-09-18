@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View, Platform } from "react-native"
+import { Platform, Pressable, StyleSheet, Text, View } from "react-native"
 
 function GoalItem({text, onDeleteItem, id}) {
     return (
@@ -18,7 +18,7 @@ export default GoalItem
 
 const styles = StyleSheet.create({
     goalITems: {
-        backgroundColor: '#f7f7f7',
+        backgroundColor: '#e4d0ff',
         borderColor: 'hsla(0, 0%, 85%, .75)',
         margin: 2,
         borderWidth: 2,
