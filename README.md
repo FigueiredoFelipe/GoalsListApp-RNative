@@ -1,5 +1,12 @@
 # Goals List App - RNative Application
 
+## App Demo
+
+Watch the demo video of the application:
+
+[![Demo Video on Youtube](https://i9.ytimg.com/vi/enMEldNcfK0/mq2.jpg?sqp=CNjOsLcG-oaymwEmCMACELQB8quKqQMa8AEB-AHWAYAC4AOKAgwIABABGDEgFih_MA8=&rs=AOn4CLAy2gEets7wOPEXM3jiOFvE5q5S0A)](https://www.youtube.com/watch?v=enMEldNcfK0)
+
+
 ## Project Purpose
 
 This project is a simple Goals List Application that allows users to add and delete their goals by interacting with the app. Built with Expo Go and React Native, the application emphasizes functionality, ease of use, and an intuitive user experience.
