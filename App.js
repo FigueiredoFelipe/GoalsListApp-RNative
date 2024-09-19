@@ -1,15 +1,13 @@
+import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { Button, FlatList, StyleSheet, View } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
 
 import GoalInput from './components/GoalInput';
 import GoalItem from './components/GoalItem';
 
 export default function App() {
   const [modalIsVisible, setModalIsVisible] = useState(false)
-  const [courseGoals, setCourseGoals] = useState([
-    {text:'Take a trip to Asia', id:' 01'},
-  ])
+  const [courseGoals, setCourseGoals] = useState([])
 
   function startAddGoalHandler(){
     setModalIsVisible(true)
