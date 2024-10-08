@@ -1,12 +1,19 @@
+import { useCallback } from "react"
 import { Platform, Pressable, StyleSheet, Text, View } from "react-native"
 
 function GoalItem({text, onDeleteItem, id}) {
+    const handlePress = useCallback(()=>{
+        onDeleteItem(id)
+    }, [onDeleteItem, id])
+
+    const isAndroid = Platform.OS === 'android';
+
     return (
-        <View style={styles.goalITems}>
+        <View style={styles.goalItems}>
             <Pressable
-                android_ripple={Platform.OS === 'android' ? {color:'#d1d1ddd1'} : null}
-                onPress={onDeleteItem.bind(this, id)}
-                style={({pressed}) => pressed && Platform.OS !== 'android' ? styles.pressedItem : null}
+                android_ripple={isAndroid ? {color:'#d1d1ddd1'} : null}
+                onPress={handlePress}
+                style={({pressed}) => pressed && !isAndroid ? styles.pressedItem : null}
                 >
                 <Text style={styles.goalText}>{text}</Text>
             </Pressable>
@@ -17,7 +24,7 @@ function GoalItem({text, onDeleteItem, id}) {
 export default GoalItem
 
 const styles = StyleSheet.create({
-    goalITems: {
+    goalItems: {
         backgroundColor: '#e4d0ff',
         borderColor: 'hsla(0, 0%, 85%, .75)',
         margin: 2,
