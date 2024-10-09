@@ -1,24 +1,27 @@
-import { useState } from "react"
+import { useCallback, useState } from "react"
 import { Button, Image, Modal, StyleSheet, Text, TextInput, View } from "react-native"
 
 function GoalInput(props) {
 
     const [enteredGoal , setEnteredGoal] = useState('')
 
-    function goalInputHandler(enteredText){setEnteredGoal(enteredText);}
+    const goalInputHandler = (enteredText) => {
+        setEnteredGoal(enteredText)
+    }; 
 
-    function addGoalHandler(){
-        if (enteredGoal.trim().length === 0) {
+    const addGoalHandler = useCallback(()=>{
+        if (!enteredGoal.trim()) {
             return
         }
         props.onAddGoal(enteredGoal)
         setEnteredGoal('')
-    }
+    }, [enteredGoal, props])
 
-    function onCancelation(){
+    const onCancelation = useCallback(()=>{
         setEnteredGoal('')
         props.onCancel()
-    }
+
+    },[props])
 
     return (
     <>
