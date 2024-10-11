@@ -2,10 +2,12 @@ import { useCallback } from "react"
 import { Platform, Pressable, StyleSheet, Text, View } from "react-native"
 
 function GoalItem({text, onDeleteItem, id}) {
+    // Memorized press handler to avoid unnecessary re-renders
     const handlePress = useCallback(()=>{
         onDeleteItem(id)
     }, [onDeleteItem, id])
 
+    // Detect if the platform is Android to apply specific styles
     const isAndroid = Platform.OS === 'android';
 
     return (
@@ -13,7 +15,7 @@ function GoalItem({text, onDeleteItem, id}) {
             <Pressable
                 android_ripple={isAndroid ? {color:'#d1d1ddd1'} : null}
                 onPress={handlePress}
-                style={({pressed}) => pressed && !isAndroid ? styles.pressedItem : null}
+                style={({pressed}) => pressed && !isAndroid ? styles.pressedItem : null} // Apply pressed state style for non-Android
                 >
                 <Text style={styles.goalText}>{text}</Text>
             </Pressable>
