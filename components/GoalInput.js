@@ -5,18 +5,21 @@ function GoalInput(props) {
 
     const [enteredGoal , setEnteredGoal] = useState('')
 
+    // Handler to update the entered goal value as the user types
     const goalInputHandler = (enteredText) => {
         setEnteredGoal(enteredText)
     }; 
 
     const addGoalHandler = useCallback(()=>{
         if (!enteredGoal.trim()) {
+            // Prevent adding empty goals
             return
         }
         props.onAddGoal(enteredGoal)
         setEnteredGoal('')
     }, [enteredGoal, props])
 
+    // Handler to reset input and cancel goal addition
     const onCancelation = useCallback(()=>{
         setEnteredGoal('')
         props.onCancel()
