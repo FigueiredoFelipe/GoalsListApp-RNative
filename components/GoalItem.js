@@ -13,10 +13,13 @@ function GoalItem({text, onDeleteItem, id}) {
     return (
         <View style={styles.goalItems}>
             <Pressable
-                android_ripple={isAndroid ? {color:'#d1d1ddd1'} : null}
+                android_ripple={isAndroid ? { color: '#d1d1ddd1' } : null}
                 onPress={handlePress}
-                style={({pressed}) => pressed && !isAndroid ? styles.pressedItem : null} // Apply pressed state style for non-Android
-                >
+                style={({ pressed }) => [pressed && !isAndroid ? styles.pressedItem : null]} // Apply pressed state style for non-Android
+                accessibilityRole="button" // Accessibility role
+                accessibilityLabel={`Delete goal: ${text}`} // Accessibility label for screen readers
+                accessibilityHint="Double tap to delete this goal" // Accessibility hint
+            >
                 <Text style={styles.goalText}>{text}</Text>
             </Pressable>
         </View>
