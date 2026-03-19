@@ -1,66 +1,51 @@
 import { useCallback, useState } from "react"
-import { Button, Image, Modal, StyleSheet, Text, TextInput, View } from "react-native"
+import { Image, Modal, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native"
 
 function GoalInput(props) {
+    const [enteredGoal, setEnteredGoal] = useState('')
 
-    const [enteredGoal , setEnteredGoal] = useState('')
-
-    // Handler to update the entered goal value as the user types
     const goalInputHandler = (enteredText) => {
         setEnteredGoal(enteredText)
-    }; 
+    }
 
     const addGoalHandler = useCallback(()=>{
-        if (!enteredGoal.trim()) {
-            // Prevent adding empty goals
-            return
-        }
+        if (!enteredGoal.trim()) return
         props.onAddGoal(enteredGoal)
         setEnteredGoal('')
     }, [enteredGoal, props])
 
-    // Handler to reset input and cancel goal addition
     const onCancelation = useCallback(()=>{
         setEnteredGoal('')
         props.onCancel()
-
-    },[props])
+    }, [props])
 
     return (
-    <>
         <Modal visible={props.visible} animationType="slide">
             <View style={styles.inputContainer}>
-                <Image 
-                style={styles.image}
-                source={require('../assets/images/goal.png')}
+                <Image
+                    style={styles.image}
+                    source={require('../assets/images/goal.png')}
                 />
+                <Text style={styles.heading}>What's your goal?</Text>
                 <TextInput
-                style={styles.textInput}
-                placeholder="What's your goal?"
-                value={enteredGoal}
-                placeholderTextColor={'#111'}
-                onChangeText={goalInputHandler}
+                    style={styles.textInput}
+                    placeholder="Type your goal here..."
+                    value={enteredGoal}
+                    placeholderTextColor='#475569'
+                    onChangeText={goalInputHandler}
                 />
-            <View style={styles.buttonContainer}>
-            <View style={styles.button}>
-                    <Button
-                    title='Cancel'
-                    color={'#f31282'}
-                    onPress={onCancelation}
-                    />
+                <View style={styles.buttonContainer}>
+                    <TouchableOpacity style={styles.cancelButton} onPress={onCancelation}>
+                        <Text style={styles.cancelButtonText}>Cancel</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.addButton} onPress={addGoalHandler}>
+                        <Text style={styles.addButtonText}>Add Goal</Text>
+                    </TouchableOpacity>
                 </View>
-                <View style={styles.button}>
-                    <Button
-                    title='Add Goal'
-                    onPress={addGoalHandler}
-                    color={'#5e0acc'}
-                    />
-                </View>
-            </View>
             </View>
         </Modal>
-    </>
-)}
+    )
+}
 
 export default GoalInput
 
@@ -69,29 +54,61 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 16,
-        backgroundColor: '#311b6b'
+        padding: 24,
+        backgroundColor: '#0F172A',
     },
     image: {
-        width: 100,
-        height: 100,
-        margin: 20
+        width: 90,
+        height: 90,
+        marginBottom: 24,
+        opacity: 0.9,
+    },
+    heading: {
+        color: '#F1F5F9',
+        fontSize: 22,
+        fontWeight: '700',
+        letterSpacing: -0.5,
+        marginBottom: 16,
     },
     textInput: {
         borderWidth: 1,
-        borderColor: '#e4d0ff',
-        backgroundColor: '#e4d0ff',
-        color: '#120438',
-        borderRadius: 5,
+        borderColor: '#334155',
+        backgroundColor: '#1E293B',
+        color: '#F1F5F9',
+        borderRadius: 10,
         width: '100%',
-        padding: 9,
+        padding: 14,
+        fontSize: 15,
+        marginBottom: 20,
     },
     buttonContainer: {
-    flexDirection: 'row',
-    marginTop: 8
+        flexDirection: 'row',
+        gap: 12,
+        width: '100%',
     },
-    button: {
-        width: 100,
-        marginHorizontal: 8,
-    }
+    cancelButton: {
+        flex: 1,
+        paddingVertical: 13,
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: '#334155',
+        alignItems: 'center',
+    },
+    cancelButtonText: {
+        color: '#94A3B8',
+        fontSize: 14,
+        fontWeight: '600',
+    },
+    addButton: {
+        flex: 1,
+        paddingVertical: 13,
+        borderRadius: 10,
+        backgroundColor: '#F03E2F',
+        alignItems: 'center',
+    },
+    addButtonText: {
+        color: '#FFFFFF',
+        fontSize: 14,
+        fontWeight: '700',
+    },
 })
